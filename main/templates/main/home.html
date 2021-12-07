@@ -1,0 +1,99 @@
+<body>
+
+
+{% extends 'main/header.html' %}
+
+  {% block content %}
+
+	{% load static %}
+
+    <!--CTA-->
+    <div class="container py-5">
+    	<div class="row">
+    		<div class="col-sm-12 col-md-12 col-lg-6 pb-4">
+    			<h1 class="display-4 font-weight-bold"> Elevate your listening</h1>
+    			<h5>Everyday headphone that make your favorite artists sound like they're performing a never ending encore.</h5>
+    			<a href="/products" class="btn btn-primary mt-2">FIND YOUR SET</a>
+    		</div>
+    		<div class="col-sm-12 col-md-12 col-lg-6">
+    			<img class="img-fluid rounded" src="{% static 'img/cta-headphones.jpg' %}" alt="Headphones">
+    		</div>
+    	</div>
+    </div>
+
+    <!--Headlines-->
+    <div class="container pt-5">
+      <div class="row"> 
+        <div class="col-lg-3 col-md-3 col-sm-12 pb-4">
+          <h5 class="text-primary">New + updated</h5>
+          <hr> 
+          {% for n in new_posts %}
+          <a class="text-dark" href="{{ n.article_slug }}">
+            <h3>{{ n.article_title }}</h3>
+            <p class="text-muted" style="font-size:12px">{{ n.article_published }}</p>
+          </a> 
+          <hr>   
+          {% endfor %}        
+        </div>
+
+        <div class="col-lg-7 col-md-7 col-sm-12 pb-4">
+          <a class="text-dark" href="/{{ most_recent.article_slug }}" style="text-decoration: none;">
+            <img src="{{ most_recent.article_image.url }}" class="card-img-top" alt="{{ most_recent.article_name }}">
+          </a> 
+          <div class="card-body">
+            <h3 class="card-title"> {{ most_recent.article_title }}</h3>
+            <p class="card-text text-muted" style="font-size:12px">{{ most_recent.article_published }}</p>
+            <p class="card-text">{{ most_recent.article_content|safe|truncatewords:50 }}</p>
+            <button class="btn btn-primary btn-sm">Read more</button>
+          </div>
+        </div>
+        <div class="col-lg-7 col-md-7 col-sm-12 pb-4"></div>
+        <div class="col-lg-2 col-md-2 col-sm-12 pb-4"> 
+          <h5 class="text-primary">Featured</h5>
+          <hr>
+          {% for f in featured_post %}
+          <a class="text-muted" href="{{ f.article_slug }}">
+            <img src="{{ f.article_image }}" alt="{{ f.article_title}} ">
+            <h6>{{ f.article_name }}</h6>
+          </a>
+          {% endfor%}
+        </div>
+      </div>
+    </div>
+
+    <!--Products-->
+    <div class="container py-3">
+    	<h2>Products</h2>
+    	<hr>
+    	<br>
+    	<div class="row">
+        {% for p in product %}
+    		<div class="col-sm-12 col-md-6 col-lg-3 pb-4">
+    			<div class="card h-100" style="border:none">
+    				<img src="{{ p.product_image.url }}" class="card-img-top" alt="{{ p.product_name}}" style="width: auto; height: 250px; object-fit: scale-down;">
+    				<div class="card-body">
+    					<h5 class="card-title">{{ p.product_name }}</h5>
+    					<p class="card-text text-muted" style="font-size: 12px;">{{ p.product_type }}</p>
+    					<p class="card-text">{{ p.product_description }}</p>
+    					<a href="{{ p.affiliate_url }}" class="btn btn-warning">Buy now</a>
+    				</div>
+    			</div>
+    		</div>
+        {% endfor %}
+    	</div>
+      <div class="container text-right">
+        <a href="/products">View more</a>
+      </div>
+    </div>
+
+
+    {% endblock %}
+
+
+	 <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
